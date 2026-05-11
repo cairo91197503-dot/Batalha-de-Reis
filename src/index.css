@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cinzel", "Playfair Display", serif;
+  
+  --color-gold: #FFD700;
+  --color-gold-light: #FFF5CC;
+  --color-gold-dark: #A67C00;
+  --color-blood: #8B0000;
+  --color-blood-dark: #4A0000;
+  --color-ice: #F8FAFC;
+  --color-deep-black: #050505;
+}
+
+@layer base {
+  html, body, #root {
+    @apply h-full w-full overflow-hidden fixed inset-0;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-deep-black text-ice font-sans antialiased;
+    overscroll-behavior: none;
+  }
+}
+
+@layer components {
+  .gold-gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-gold-light via-gold to-gold-dark;
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+  }
+
+  .medieval-panel {
+    @apply bg-stone-950/80 border border-gold/20 rounded shadow-[0_0_40px_rgba(0,0,0,0.8)] backdrop-blur-sm relative transition-all;
+    background-image: 
+      radial-gradient(circle at top left, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at bottom right, rgba(139, 0, 0, 0.05) 0%, transparent 40%);
+  }
+
+  .btn-medieval {
+    @apply bg-blood text-gold font-serif font-bold uppercase tracking-widest border border-gold/40 shadow-lg transition-all active:scale-95 px-8 py-3 rounded;
+    background-image: linear-gradient(to bottom, rgba(139, 0, 0, 0.8), rgba(74, 0, 0, 1));
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(212, 175, 55, 0.2);
+  }
+
+  .btn-medieval:hover {
+    @apply brightness-125 border-gold/60;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.4), 0 0 40px rgba(212, 175, 55, 0.1);
+  }
+
+  .interactive-square {
+    @apply relative w-full h-full flex items-center justify-center cursor-pointer transition-colors duration-300;
+  }
+
+  .glow-gold {
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+  }
+
+  .glow-red {
+    filter: drop-shadow(0 0 8px rgba(139, 0, 0, 0.8));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-deep-black;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gold/20 rounded-full hover:bg-gold/40 transition-colors;
+  }
+}
+
+/* Custom animations */
+@keyframes pulse-gold {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6)); }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 3s infinite ease-in-out;
+}

@@ -1,0 +1,21 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user statistics and role information.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The user's display name or username." },
+        "level": { "type": "integer", "description": "The user's current level." },
+        "elo": { "type": "integer", "description": "The user's chess rating (ELO)." }
+      },
+      "required": ["name", "level", "elo"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "The private user profiles."
+    }
+  }
+}
